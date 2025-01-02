@@ -15,7 +15,7 @@ const eslintConfig = [
   {
     files: ["**/*.ts"],
     rules: {
-      "no-var": "off", // Disable 'no-var' for TypeScript files
+      "no-var": "off", 
     },
   }
 ];

@@ -9,7 +9,7 @@ interface IParams {
 
 export async function POST(
     request: Request,
-    { params }: { params: IParams }
+    context: { params: IParams }
 ) {
     const currentUser = await getCurrentUser();
 
@@ -17,23 +17,22 @@ export async function POST(
         return NextResponse.error();
     }
 
-    const { listingId } = params;
+    const { listingId } = context.params;
 
-    if (!listingId || typeof listingId !== 'string') {
-        throw new Error('Invalid ID');
+    if (!listingId || typeof listingId !== "string") {
+        throw new Error("Invalid ID");
     }
 
     const favoriteIds = [...(currentUser.favoriteIds || [])];
-
     favoriteIds.push(listingId);
 
     const user = await prisma.user.update({
         where: {
-            id: currentUser.id
+            id: currentUser.id,
         },
         data: {
-            favoriteIds
-        }
+            favoriteIds,
+        },
     });
 
     return NextResponse.json(user);
@@ -41,7 +40,7 @@ export async function POST(
 
 export async function DELETE(
     request: Request,
-    { params }: { params: IParams }
+    context: { params: IParams }
 ) {
     const currentUser = await getCurrentUser();
 
@@ -49,23 +48,22 @@ export async function DELETE(
         return NextResponse.error();
     }
 
-    const { listingId } = await params;
+    const { listingId } = context.params;
 
-    if (!listingId || typeof listingId !== 'string') {
-        throw new Error('Invalid ID');
+    if (!listingId || typeof listingId !== "string") {
+        throw new Error("Invalid ID");
     }
 
     let favoriteIds = [...(currentUser.favoriteIds || [])];
-
     favoriteIds = favoriteIds.filter((id) => id !== listingId);
 
     const user = await prisma.user.update({
         where: {
-            id: currentUser.id
+            id: currentUser.id,
         },
         data: {
-            favoriteIds
-        }
+            favoriteIds,
+        },
     });
 
     return NextResponse.json(user);
