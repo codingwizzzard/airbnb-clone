@@ -16,8 +16,8 @@ export async function POST(
         return NextResponse.error();
     }
 
-    // Destructure listingId from context.params
-    const { listingId } = params;
+    // Directly access params from the route
+    const { listingId } = await params;
 
     if (!listingId || typeof listingId !== "string") {
         throw new Error("Invalid ID");
@@ -48,8 +48,8 @@ export async function DELETE(
         return NextResponse.error();
     }
 
-    // Destructure listingId from context.params
-    const { listingId } = params;
+    // Directly access params from the route
+    const { listingId } = await params;
 
     if (!listingId || typeof listingId !== "string") {
         throw new Error("Invalid ID");
