@@ -73,6 +73,7 @@ const ListingClient: React.FC<ListingClientProps> = ({
             router.push('/trips');
         })
         .catch((error) => {
+            console.log(error);
             toast.error('Something went wrong');
         })
         .finally(() => {

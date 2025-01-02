@@ -56,7 +56,14 @@ const SearchModal = () => {
             currentQuery = qs.parse(params.toString());
         }
 
-        const updatedQuery: any = {
+        const updatedQuery: {
+            locationValue?: string;
+            guestCount?: number;
+            roomCount?: number;
+            bathroomCount?: number;
+            startDate?: string;
+            endDate?: string;
+        } = {
             ...currentQuery,
             locationValue: location?.value,
             guestCount,

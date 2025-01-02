@@ -31,7 +31,8 @@ export default async function getCurrentUser() {
             emailVerified: currentUser.emailVerified?.toISOString() || null,
         };
 
-    } catch (error:any) {
+    } catch (error:unknown) {
+        console.log(error);
         return null;
     }
 }

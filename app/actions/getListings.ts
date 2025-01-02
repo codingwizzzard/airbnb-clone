@@ -14,7 +14,7 @@ export interface IListingsParams {
 export default async function getListings(params:IListingsParams) {
     try {
         const { userId, guestCount, roomCount, bathroomCount, startDate, endDate, locationValue, category } = await params;
-        let query: any = {};
+        const query: Record<string, unknown> = {};
 
         if (userId) {
             query.userId = userId;
@@ -76,7 +76,8 @@ export default async function getListings(params:IListingsParams) {
             createdAt: listing.createdAt.toISOString()
         }));
         return safeListings;
-    } catch (error: any) {
-        throw new Error(error);
+    } catch (error: unknown) {
+        console.log(error);
+        throw new Error(error as string);
     }
 }

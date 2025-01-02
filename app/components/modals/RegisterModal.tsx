@@ -39,6 +39,7 @@ const RegisterModal = () => {
                 loginModal.onOpen();    
             })
             .catch((error) => {
+                console.log(error);
                 toast.error('Something went wrong');
             })
             .finally(() => {
