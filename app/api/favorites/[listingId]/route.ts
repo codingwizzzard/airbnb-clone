@@ -8,7 +8,7 @@ interface IParams {
 
 export async function POST(
     request: Request,
-    context: { params: IParams }
+    { params }: { params: IParams }
 ) {
     const currentUser = await getCurrentUser();
 
@@ -17,7 +17,7 @@ export async function POST(
     }
 
     // Destructure listingId from context.params
-    const { listingId } = context.params;
+    const { listingId } = params;
 
     if (!listingId || typeof listingId !== "string") {
         throw new Error("Invalid ID");
@@ -40,7 +40,7 @@ export async function POST(
 
 export async function DELETE(
     request: Request,
-    context: { params: IParams }
+    { params }: { params: IParams }
 ) {
     const currentUser = await getCurrentUser();
 
@@ -49,7 +49,7 @@ export async function DELETE(
     }
 
     // Destructure listingId from context.params
-    const { listingId } = context.params;
+    const { listingId } = params;
 
     if (!listingId || typeof listingId !== "string") {
         throw new Error("Invalid ID");
